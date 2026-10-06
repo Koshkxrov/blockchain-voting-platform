@@ -78,7 +78,7 @@ export async function PUT(
     // Check if email is already taken by another user
     const existingUser = await users.findOne({
       email,
-      _id: { $ne: params.id }
+      _id: { $ne: new ObjectId(params.id) }
     });
     if (existingUser) {
       return NextResponse.json(
