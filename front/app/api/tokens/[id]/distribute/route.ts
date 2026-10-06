@@ -40,9 +40,17 @@ export async function POST(
       );
     }
 
-    // Create contract instance
-    const provider = new ethers.JsonRpcProvider(process.env.POLYGON_RPC_URL);
-    const signer = new ethers.Wallet(session.user.privateKey, provider);
+    // Create contract instance with a server-side administrative signer.
+    const rpcUrl = process.env.NEXT_PRIVATE_RPC_URL || process.env.NEXT_PUBLIC_RPC_URL;
+    const privateKey = process.env.ADMIN_PRIVATE_KEY || process.env.PRIVATE_KEY;
+    if (!rpcUrl || !privateKey) {
+      return NextResponse.json(
+        { error: 'Blockchain service is not configured' },
+        { status: 503 }
+      );
+    }
+    const provider = new ethers.JsonRpcProvider(rpcUrl);
+    const signer = new ethers.Wallet(privateKey, provider);
     const contract = new ethers.Contract(
       token.contractAddress,
       ['function transfer(address to, uint256 amount)'],

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { ObjectId } from 'mongodb';
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,6 +11,13 @@ export async function POST(req: NextRequest) {
     if (!session?.user) {
       return NextResponse.json(
         { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    if (!session.user.id || !ObjectId.isValid(session.user.id)) {
+      return NextResponse.json(
+        { error: 'Invalid user session' },
         { status: 401 }
       );
     }
@@ -49,7 +57,7 @@ export async function POST(req: NextRequest) {
 
     // Update user subscription
     await users.updateOne(
-      { _id: session.user.id },
+      { _id: new ObjectId(session.user.id) },
       {
         $set: {
           subscription: {
