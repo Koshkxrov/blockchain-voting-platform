@@ -1,0 +1,106 @@
+<svg width="1440" height="480" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Blockchain Voting Platform</title>
+  <desc id="desc">A purple and blue banner with a connected ballot symbol for the Blockchain Voting Platform.</desc>
+  <defs>
+    <linearGradient id="background" x1="42" y1="18" x2="1375" y2="466" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#080B18"/>
+      <stop offset="0.52" stop-color="#10142A"/>
+      <stop offset="1" stop-color="#09111F"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#A855F7"/>
+      <stop offset="0.52" stop-color="#8247E5"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+    <radialGradient id="purpleGlow" cx="0" cy="0" r="1" gradientTransform="translate(1064 242) rotate(90) scale(285 360)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8247E5" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#8247E5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blueGlow" cx="0" cy="0" r="1" gradientTransform="translate(1265 95) rotate(137) scale(252 310)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" stroke="#94A3B8" stroke-opacity="0.08"/>
+    </pattern>
+    <filter id="shadow" x="-60%" y="-60%" width="220%" height="220%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity="0.36"/>
+    </filter>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="480" rx="30" fill="url(#background)"/>
+  <rect width="1440" height="480" rx="30" fill="url(#grid)"/>
+  <rect width="1440" height="480" rx="30" fill="url(#purpleGlow)"/>
+  <rect width="1440" height="480" rx="30" fill="url(#blueGlow)"/>
+  <path d="M0 392C245 324 367 455 592 401C778 356 869 253 1067 285C1240 313 1319 397 1440 359V480H0V392Z" fill="#8247E5" fill-opacity="0.055"/>
+
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <g transform="translate(88 72)">
+      <rect width="205" height="34" rx="17" fill="#8247E5" fill-opacity="0.14" stroke="#A78BFA" stroke-opacity="0.38"/>
+      <circle cx="19" cy="17" r="5" fill="#4ADE80" filter="url(#glow)"/>
+      <text x="34" y="22" fill="#D8B4FE" font-size="13" font-weight="700" letter-spacing="1.6">POLYGON AMOY</text>
+    </g>
+
+    <text x="88" y="179" fill="#F8FAFC" font-size="55" font-weight="760" letter-spacing="-1.8">Blockchain Voting</text>
+    <text x="88" y="242" fill="url(#accent)" font-size="55" font-weight="760" letter-spacing="-1.8">Platform</text>
+    <text x="91" y="292" fill="#A8B2C7" font-size="20" font-weight="450">Transparent decisions. Verifiable results.</text>
+
+    <g transform="translate(88 341)" font-size="13" font-weight="650">
+      <rect width="106" height="38" rx="12" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.12"/>
+      <text x="20" y="24" fill="#E2E8F0">NEXT.JS</text>
+      <rect x="118" width="126" height="38" rx="12" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.12"/>
+      <text x="137" y="24" fill="#E2E8F0">TYPESCRIPT</text>
+      <rect x="256" width="106" height="38" rx="12" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.12"/>
+      <text x="275" y="24" fill="#E2E8F0">SOLIDITY</text>
+      <rect x="374" width="106" height="38" rx="12" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.12"/>
+      <text x="394" y="24" fill="#E2E8F0">HARDHAT</text>
+    </g>
+  </g>
+
+  <g filter="url(#shadow)">
+    <path d="M1080 98L1218 177V335L1080 414L942 335V177L1080 98Z" fill="#0B1023" fill-opacity="0.83" stroke="url(#accent)" stroke-width="2"/>
+    <path d="M1080 120L1199 188V324L1080 392L961 324V188L1080 120Z" fill="#121933" stroke="#A78BFA" stroke-opacity="0.25"/>
+  </g>
+
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1013 227H1147L1135 323H1025L1013 227Z" fill="#151E3D" stroke="#A78BFA" stroke-width="4"/>
+    <path d="M1037 201H1124L1147 227H1013L1037 201Z" fill="#8247E5" fill-opacity="0.28" stroke="#A78BFA" stroke-width="4"/>
+    <rect x="1047" y="168" width="67" height="67" rx="10" transform="rotate(8 1047 168)" fill="#F8FAFC"/>
+    <path d="M1060 198L1073 212L1102 182" stroke="#8247E5" stroke-width="8"/>
+    <path d="M1048 278L1070 299L1116 253" stroke="url(#accent)" stroke-width="11" filter="url(#glow)"/>
+  </g>
+
+  <g stroke="#8B5CF6" stroke-opacity="0.65" stroke-width="2">
+    <path d="M957 160L898 124"/>
+    <path d="M940 265L852 265"/>
+    <path d="M975 359L906 411"/>
+    <path d="M1198 158L1261 119"/>
+    <path d="M1221 262L1320 262"/>
+    <path d="M1187 360L1268 407"/>
+  </g>
+  <g fill="#10162D" stroke="#A78BFA" stroke-width="3">
+    <circle cx="891" cy="120" r="10"/>
+    <circle cx="839" cy="265" r="12"/>
+    <circle cx="895" cy="419" r="10"/>
+    <circle cx="1271" cy="113" r="10"/>
+    <circle cx="1334" cy="262" r="12"/>
+    <circle cx="1280" cy="414" r="10"/>
+  </g>
+  <g fill="#38BDF8">
+    <circle cx="891" cy="120" r="4"/>
+    <circle cx="839" cy="265" r="5"/>
+    <circle cx="895" cy="419" r="4"/>
+    <circle cx="1271" cy="113" r="4"/>
+    <circle cx="1334" cy="262" r="5"/>
+    <circle cx="1280" cy="414" r="4"/>
+  </g>
+
+  <rect x="1" y="1" width="1438" height="478" rx="29" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+</svg>
