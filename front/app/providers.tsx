@@ -39,7 +39,8 @@ function BlockchainProvider({ children }: { children: React.ReactNode }) {
         setProvider(provider);
 
         // Listen for account changes
-        const handleAccountsChanged = (accounts: string[]) => {
+        const handleAccountsChanged = (...args: unknown[]) => {
+          const accounts = Array.isArray(args[0]) ? args[0] as string[] : [];
           if (accounts.length === 0) {
             setSigner(null);
           }
