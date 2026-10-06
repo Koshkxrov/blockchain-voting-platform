@@ -32,7 +32,7 @@ export async function GET(
     const votings = db.collection('votings');
 
     // Get voting metadata
-    const voting = await votings.findOne({ _id: votingId });
+    const voting = await votings.findOne({ id: votingId });
     if (!voting) {
       return NextResponse.json(
         { error: 'Voting not found' },

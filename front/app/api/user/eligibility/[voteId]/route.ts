@@ -46,7 +46,7 @@ export async function GET(
     }
 
     // Get voting data
-    const voting = await votings.findOne({ _id: votingId });
+    const voting = await votings.findOne({ id: votingId });
     if (!voting) {
       return NextResponse.json(
         { error: 'Voting not found' },

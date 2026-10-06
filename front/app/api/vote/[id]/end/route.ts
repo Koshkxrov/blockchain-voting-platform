@@ -54,7 +54,7 @@ export async function POST(
     }
 
     // Get voting data
-    const voting = await votings.findOne({ _id: votingId });
+    const voting = await votings.findOne({ id: votingId });
     if (!voting) {
       return NextResponse.json(
         { error: 'Voting not found' },
@@ -78,7 +78,7 @@ export async function POST(
 
     // Update voting status in MongoDB
     await votings.updateOne(
-      { _id: votingId },
+      { id: votingId },
       { $set: { status: 'ended' } }
     );
 
