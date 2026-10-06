@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../../../auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth';
 import { getContract } from '@/lib/contract';
 import { keccak256, toUtf8Bytes } from 'ethers';
 import { connectToDatabase } from '@/lib/mongodb';
