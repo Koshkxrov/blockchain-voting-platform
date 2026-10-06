@@ -6,10 +6,10 @@ import { useSubscription } from '../contexts/SubscriptionContext';
 
 export default function SubscriptionCheck({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
-  const { hasSubscription, isLoading, error } = useSubscription();
+  const { hasSubscription, loading, error } = useSubscription();
   const router = useRouter();
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
@@ -30,7 +30,7 @@ export default function SubscriptionCheck({ children }: { children: React.ReactN
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
         <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-4">Error</h2>
-          <p className="text-gray-600 mb-6">{error}</p>
+          <p className="text-gray-600 mb-6">{error.message}</p>
           <button
             onClick={() => window.location.reload()}
             className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
