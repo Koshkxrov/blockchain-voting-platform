@@ -1,23 +1,21 @@
 import { ethers } from 'ethers';
 import votingAbi from '@/contracts/VotingPlatform.json';
 
-const VOTING_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
-const RPC_URL = process.env.NEXT_RPC_URL;
-
 export type VotingContract = ethers.Contract;
-
-if (!RPC_URL) {
-  throw new Error('RPC URL not found in environment variables');
-}
-
-// Create provider instance
-const provider = new ethers.JsonRpcProvider(RPC_URL);
 
 // Initialize provider connection
 let providerInitialized = false;
+let provider: ethers.JsonRpcProvider | null = null;
+
 const initializeProvider = async () => {
   if (!providerInitialized) {
     try {
+      const rpcUrl = process.env.NEXT_PRIVATE_RPC_URL || process.env.NEXT_PUBLIC_RPC_URL;
+      if (!rpcUrl) {
+        throw new Error('RPC URL not found in environment variables');
+      }
+
+      provider = new ethers.JsonRpcProvider(rpcUrl);
       const network = await provider.getNetwork();
       if (network.chainId !== 80002n) {
         throw new Error(`Wrong network. Expected Polygon Amoy (chainId: 80002), got chainId: ${network.chainId}`);
@@ -34,7 +32,8 @@ const initializeProvider = async () => {
 let contractInstance: VotingContract | null = null;
 
 export async function getContract(): Promise<VotingContract> {
-  if (!VOTING_CONTRACT_ADDRESS) {
+  const votingContractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+  if (!votingContractAddress) {
     throw new Error('Voting contract address not found in environment variables');
   }
 
@@ -44,6 +43,9 @@ export async function getContract(): Promise<VotingContract> {
   }
 
   await initializeProvider();
-  contractInstance = new ethers.Contract(VOTING_CONTRACT_ADDRESS, votingAbi.abi, provider);
+  if (!provider) {
+    throw new Error('RPC provider failed to initialize');
+  }
+  contractInstance = new ethers.Contract(votingContractAddress, votingAbi.abi, provider);
   return contractInstance;
 }
