@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
@@ -44,7 +45,7 @@ export async function POST(
     const { db } = await connectToDatabase();
     const tokens = db.collection('tokens');
 
-    const token = await tokens.findOne({ _id: params.id });
+    const token = await tokens.findOne({ _id: new ObjectId(params.id) });
     if (!token) {
       return NextResponse.json(
         { error: 'Token not found' },
@@ -69,7 +70,7 @@ export async function POST(
 
     // Update token holders count
     const result = await tokens.updateOne(
-      { _id: params.id },
+      { _id: new ObjectId(params.id) },
       { $inc: { holders: 1 } }
     );
 

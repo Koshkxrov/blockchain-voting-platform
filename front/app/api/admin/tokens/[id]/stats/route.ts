@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
@@ -22,7 +23,7 @@ export async function GET(
     const tokens = db.collection('tokens');
     const transactions = db.collection('transactions');
 
-    const token = await tokens.findOne({ _id: params.id });
+    const token = await tokens.findOne({ _id: new ObjectId(params.id) });
     if (!token) {
       return NextResponse.json(
         { error: 'Token not found' },

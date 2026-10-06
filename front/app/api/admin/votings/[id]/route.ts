@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
@@ -20,7 +21,7 @@ export async function GET(
     const { db } = await connectToDatabase();
     const votings = db.collection('votings');
 
-    const voting = await votings.findOne({ _id: params.id });
+    const voting = await votings.findOne({ _id: new ObjectId(params.id) });
     if (!voting) {
       return NextResponse.json(
         { error: 'Voting not found' },
@@ -72,7 +73,7 @@ export async function PUT(
     const votings = db.collection('votings');
 
     const result = await votings.updateOne(
-      { _id: params.id },
+      { _id: new ObjectId(params.id) },
       {
         $set: {
           title,
@@ -122,7 +123,7 @@ export async function DELETE(
     const { db } = await connectToDatabase();
     const votings = db.collection('votings');
 
-    const result = await votings.deleteOne({ _id: params.id });
+    const result = await votings.deleteOne({ _id: new ObjectId(params.id) });
     if (result.deletedCount === 0) {
       return NextResponse.json(
         { error: 'Voting not found' },

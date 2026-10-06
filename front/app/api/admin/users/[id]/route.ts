@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
@@ -21,7 +22,7 @@ export async function GET(
     const users = db.collection('users');
 
     const user = await users.findOne(
-      { _id: params.id },
+      { _id: new ObjectId(params.id) },
       { projection: { password: 0 } }
     );
     if (!user) {
@@ -87,7 +88,7 @@ export async function PUT(
     }
 
     const result = await users.updateOne(
-      { _id: params.id },
+      { _id: new ObjectId(params.id) },
       {
         $set: {
           email,
@@ -138,7 +139,7 @@ export async function DELETE(
     const { db } = await connectToDatabase();
     const users = db.collection('users');
 
-    const result = await users.deleteOne({ _id: params.id });
+    const result = await users.deleteOne({ _id: new ObjectId(params.id) });
     if (result.deletedCount === 0) {
       return NextResponse.json(
         { error: 'User not found' },

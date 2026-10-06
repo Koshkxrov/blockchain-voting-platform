@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
@@ -20,7 +21,7 @@ export async function GET(
     const { db } = await connectToDatabase();
     const tokens = db.collection('tokens');
 
-    const token = await tokens.findOne({ _id: params.id });
+    const token = await tokens.findOne({ _id: new ObjectId(params.id) });
     if (!token) {
       return NextResponse.json(
         { error: 'Token not found' },
@@ -65,7 +66,7 @@ export async function PUT(
     const tokens = db.collection('tokens');
 
     const result = await tokens.updateOne(
-      { _id: params.id },
+      { _id: new ObjectId(params.id) },
       {
         $set: {
           name,
@@ -109,7 +110,7 @@ export async function DELETE(
     const { db } = await connectToDatabase();
     const tokens = db.collection('tokens');
 
-    const result = await tokens.deleteOne({ _id: params.id });
+    const result = await tokens.deleteOne({ _id: new ObjectId(params.id) });
     if (result.deletedCount === 0) {
       return NextResponse.json(
         { error: 'Token not found' },
