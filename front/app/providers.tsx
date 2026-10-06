@@ -5,16 +5,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { ThemeProvider } from './context/ThemeContext';
 
-declare global {
-  interface Window {
-    ethereum?: {
-      request: (args: { method: string; params?: any[] }) => Promise<any>;
-      on: (event: string, callback: (params?: any) => void) => void;
-      removeListener: (event: string, callback: (params?: any) => void) => void;
-    };
-  }
-}
-
 interface BlockchainContextProps {
   provider: ethers.BrowserProvider | null;
   signer: ethers.JsonRpcSigner | null;
