@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { ObjectId } from 'mongodb';
+
+function parseUserId(id: string) {
+  return ObjectId.isValid(id) ? new ObjectId(id) : null;
+}
 
 export async function GET(
   req: NextRequest,
@@ -19,9 +24,13 @@ export async function GET(
 
     const { db } = await connectToDatabase();
     const users = db.collection('users');
+    const userId = parseUserId(params.id);
+    if (!userId) {
+      return NextResponse.json({ error: 'Invalid user ID' }, { status: 400 });
+    }
 
     const user = await users.findOne(
-      { _id: params.id },
+      { _id: userId },
       { projection: { subscription: 1, email: 1 } }
     );
     if (!user) {
@@ -73,13 +82,17 @@ export async function PUT(
 
     const { db } = await connectToDatabase();
     const users = db.collection('users');
+    const userId = parseUserId(params.id);
+    if (!userId) {
+      return NextResponse.json({ error: 'Invalid user ID' }, { status: 400 });
+    }
 
     const now = new Date();
     const expiresAt = new Date(now);
     expiresAt.setMonth(expiresAt.getMonth() + (plan === 'monthly' ? 1 : 12));
 
     const result = await users.updateOne(
-      { _id: params.id },
+      { _id: userId },
       {
         $set: {
           subscription: {
@@ -125,9 +138,13 @@ export async function DELETE(
 
     const { db } = await connectToDatabase();
     const users = db.collection('users');
+    const userId = parseUserId(params.id);
+    if (!userId) {
+      return NextResponse.json({ error: 'Invalid user ID' }, { status: 400 });
+    }
 
     const result = await users.updateOne(
-      { _id: params.id },
+      { _id: userId },
       { $unset: { subscription: "" } }
     );
 
