@@ -2,10 +2,10 @@
 
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const { data: session, status, update } = useSession();
   const searchParams = useSearchParams();
@@ -156,5 +156,19 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={(
+        <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900">
+          <p className="text-gray-600 dark:text-gray-300">Loading sign-in form...</p>
+        </div>
+      )}
+    >
+      <LoginForm />
+    </Suspense>
   );
 }
