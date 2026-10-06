@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-
 export async function POST(req: NextRequest) {
   try {
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      return NextResponse.json(
+        { error: 'Authentication service is not configured' },
+        { status: 503 }
+      );
+    }
+
     const { email, password } = await req.json();
 
     // Validate input
@@ -31,7 +37,7 @@ export async function POST(req: NextRequest) {
         walletAddress: user.walletAddress,
         role: user.role
       },
-      JWT_SECRET,
+      jwtSecret,
       { expiresIn: '24h' }
     );
 

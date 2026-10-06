@@ -18,8 +18,6 @@ interface User {
   };
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
